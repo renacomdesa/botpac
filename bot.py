@@ -1,10 +1,13 @@
 import os
 import re
 from telegram import Update
+#from telegram.ext import Application, CommandHandler
+
 from telegram.ext import (
     ApplicationBuilder, CommandHandler, MessageHandler,
     ContextTypes, ConversationHandler, filters
 )
+from dotenv import load_dotenv
 
 # Estados de la conversación
 PHOTO, AMOUNT, NUMBER = range(3)
@@ -51,6 +54,8 @@ async def cancel(update: Update, context: ContextTypes.DEFAULT_TYPE):
     return ConversationHandler.END
 
 def main():
+    load_dotenv()
+
     TOKEN = os.environ.get("BOT_TOKEN")
     if not TOKEN:
         raise Exception("No se encontró la variable BOT_TOKEN")
